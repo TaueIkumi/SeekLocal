@@ -67,7 +67,8 @@ jobs:
           }
           $lines = $installers | ForEach-Object {
             $hash = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
-            "$hash  $($_.Name)"
+            $publishedName = "SeekLocal-${{ steps.tauri.outputs.appVersion }}-windows-x64-setup.exe"
+            "$hash  $publishedName"
           }
           $lines | Set-Content -Encoding utf8 SHA256SUMS.txt
 

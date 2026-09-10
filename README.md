@@ -13,6 +13,12 @@ No account. No document uploads. No cloud database. No chat interface standing b
 
 > SeekLocal is in early development. If local-first search is something you want to exist, **star the repository** and follow the journey.
 
+## Download the Windows preview
+
+[**Download SeekLocal v0.1.0-alpha.1 for Windows →**](https://github.com/TaueIkumi/SeekLocal/releases/download/v0.1.0-alpha.1/SeekLocal-0.1.0-windows-x64-setup.exe)
+
+This unsigned early preview may trigger a Windows SmartScreen warning. You can verify the download with the published [`SHA256SUMS.txt`](https://github.com/TaueIkumi/SeekLocal/releases/download/v0.1.0-alpha.1/SHA256SUMS.txt).
+
 ## Why SeekLocal?
 
 Most search tools make you choose between basic filename matching and uploading private documents to a hosted AI service. SeekLocal is exploring a third option: useful meaning-based retrieval that runs on your own machine.
