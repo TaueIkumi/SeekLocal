@@ -890,7 +890,7 @@ mod tests {
 
     use super::{
         SearchIndex, cosine_similarity, embedding_from_bytes, embedding_to_bytes, fts_query,
-        model_files_available, semantic_document_summary,
+        semantic_document_summary,
     };
 
     #[test]
@@ -986,7 +986,7 @@ mod tests {
         fs::write(&blob, vec![0_u8; 1_000_001]).expect("model fixture");
         symlink(&blob, directory.path().join("model_optimized.onnx")).expect("model cache symlink");
 
-        assert!(model_files_available(directory.path()));
+        assert!(super::model_files_available(directory.path()));
     }
 
     #[test]
