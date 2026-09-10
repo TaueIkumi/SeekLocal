@@ -1,0 +1,78 @@
+name: Release Windows preview
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Lint frontend
+        run: npm run lint
+
+      - name: Test search core
+        run: cargo test -p seeklocal-core
+
+      - name: Build installer and create prerelease
+        id: tauri
+        uses: tauri-apps/tauri-action@action-v0.6.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tauriScript: npm run tauri --
+          args: --config apps/desktop/src-tauri/tauri.conf.json --bundles nsis
+          tagName: ${{ github.ref_name }}
+          releaseName: SeekLocal ${{ github.ref_name }}
+          releaseBody: |
+            First public Windows preview of SeekLocal.
+
+            - Local TXT and Markdown search
+            - Optional Japanese and English meaning search
+            - Source-linked results with open and reveal actions
+
+            This preview is unsigned and may trigger a Windows SmartScreen warning. It is intended for early testing, not production use.
+          releaseDraft: false
+          prerelease: true
+          includeUpdaterJson: false
+          assetNamePattern: SeekLocal-[version]-windows-[arch][setup][ext]
+
+      - name: Generate SHA-256 checksums
+        shell: pwsh
+        run: |
+          $installers = Get-ChildItem -Path target/release/bundle/nsis -Filter *.exe
+          if ($installers.Count -eq 0) {
+            throw "No NSIS installer was produced."
+          }
+          $lines = $installers | ForEach-Object {
+            $hash = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
+          }
+          $lines | Set-Content -Encoding utf8 SHA256SUMS.txt
+
+      - name: Upload checksums
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload $env:GITHUB_REF_NAME SHA256SUMS.txt --clobber

@@ -73,6 +73,8 @@ Keyword search is immediately available and runs entirely offline. Meaning searc
 
 SeekLocal currently targets contributors and early testers. You will need Node.js, npm, Rust, and the [Tauri 2 platform prerequisites](https://v2.tauri.app/start/prerequisites/).
 
+Windows preview installers are published as [GitHub pre-releases](https://github.com/TaueIkumi/SeekLocal/releases). They are currently unsigned and may trigger a Windows SmartScreen warning.
+
 ```bash
 git clone https://github.com/TaueIkumi/SeekLocal.git
 cd SeekLocal
