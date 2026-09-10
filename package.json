@@ -1,0 +1,34 @@
+{
+  "name": "seeklocal",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config apps/desktop/vite.config.ts",
+    "build": "tsc -b apps/desktop/tsconfig.json && vite build --config apps/desktop/vite.config.ts",
+    "lint": "eslint apps/desktop/src --max-warnings=0",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev --config apps/desktop/src-tauri/tauri.conf.json",
+    "tauri:build": "tauri build --config apps/desktop/src-tauri/tauri.conf.json"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.11.1",
+    "@tauri-apps/plugin-dialog": "2.7.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@tauri-apps/cli": "2.11.4",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@vitejs/plugin-react": "6.1.1",
+    "eslint": "10.10.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.6",
+    "globals": "17.12.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.0",
+    "vite": "8.2.2"
+  }
+}
