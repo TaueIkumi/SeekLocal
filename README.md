@@ -13,6 +13,12 @@ No account. No document uploads. No cloud database. No chat interface standing b
 
 > SeekLocal is in early development. If local-first search is something you want to exist, **star the repository** and follow the journey.
 
+## See it in action
+
+[![SeekLocal demo showing keyword search and local meaning search](docs/assets/seeklocal-demo.gif)](SeekLocal.mp4)
+
+The same query returns no keyword match, then finds the related document by meaning. [Watch the full 1080p video](SeekLocal.mp4).
+
 ## Download the Windows preview
 
 [**Download SeekLocal v0.1.0-alpha.1 for Windows →**](https://github.com/TaueIkumi/SeekLocal/releases/download/v0.1.0-alpha.1/SeekLocal-0.1.0-windows-x64-setup.exe)
